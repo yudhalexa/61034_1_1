@@ -11,7 +11,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import ac.id.umn.if61034_alexazetayudhadinatha_modul1.ui.theme.BasicsCodelabTheme
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ElevatedButton
 import androidx.compose.ui.unit.dp
 
 class MainActivity : ComponentActivity() {
@@ -34,25 +38,67 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MyApp(modifier: Modifier = Modifier) {
-    Surface(
-        modifier = modifier,
-        color = MaterialTheme.colorScheme.background
-    ) {
-        Greeting("Android")
-    }
-}
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Surface(color = MaterialTheme.colorScheme.primary) {
-        Text(
-            text = "Hello $name!",
-            modifier = modifier.padding(24.dp)
-        )
+fun MyApp(
+    modifier: Modifier = Modifier,
+    names: List<String> = listOf("World", "Compose")) {
+//    Surface(
+//        modifier = modifier,
+//        color = MaterialTheme.colorScheme.background
+//    ) {
+//        Greeting("Android")
+//    }
+    Column(modifier = modifier.padding(vertical = 4.dp)) {
+        for (name in names) {
+            Greeting(name = name)
+        }
     }
 }
 
-@Preview(showBackground = true)
+//@Composable
+//fun Greeting(name: String, modifier: Modifier = Modifier) {
+//    Surface(color = MaterialTheme.colorScheme.primary) {
+////        Text(
+////            text = "Hello $name!",
+////            modifier = modifier.padding(24.dp)
+////        )
+//
+//        // Greeting change
+//        Column {
+//            Text("Hello")
+//            Text(name)
+//        }
+//    }
+//}
+
+// Solution
+@Composable
+fun Greeting(name: String, modifier: Modifier = Modifier) {
+    Surface(
+        color = MaterialTheme.colorScheme.primary,
+        modifier = modifier.padding(vertical = 4.dp, horizontal = 8.dp)) {
+//        Column(modifier = modifier.padding(24.dp)) {
+//            Text(text = "Hello ")
+//            Text(text = name)
+//        }
+//        Column(modifier = Modifier.fillMaxWidth().padding(24.dp)) {
+//            Text(text = "Hello ")
+//            Text(text = name)
+//        }
+        Row(modifier = Modifier.padding(24.dp)) {
+            Column(modifier = Modifier.weight(1f)) {
+                Text(text = "Hello ")
+                Text(text = name)
+            }
+            ElevatedButton(
+                onClick = { /* TODO */ }
+            ) {
+                Text("Show more")
+            }
+        }
+    }
+}
+
+@Preview(showBackground = true, widthDp = 320)
 @Composable
 fun GreetingPreview() {
     BasicsCodelabTheme {
